@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<form method="post">
+    <h2>Check Service</h2>
+    <div id="result">
+        Name ------------<input type="text" id="MyName" />
+        ----------------------------------------------------------------------</br>
+        "Please Enter Amount" <input type="text" value="" id="txtNumber" /></br>
+        ---------------------------------------------------------------------</br>
+        <input type="button" title="Generate Words" onclick="getValue();" value="Generate Words" /></br></br>
+    </div>
+
+</form>
+<script type="text/javascript">
+    function getValue()
+    {
+        alert("hello");
+        if (document.getElementById("txtNumber").value != undefined && document.getElementById("txtNumber").value != "")
+        {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    document.getElementById("result").innerHTML = document.getElementById("MyName").value+ this.responseText;
+                }
+            };
+            xhttp.open("GET", "/CheckService/UpdateResults/" + document.getElementById("txtNumber").value, true);
+            xhttp.send();
+        }
+        else
+            document.getElementById("result").innerHTML = "Please enter number";
+    }
+</script>
